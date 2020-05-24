@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3100A1FE247A680E00639BF2 /* BinaryTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3100A1FD247A680E00639BF2 /* BinaryTree.swift */; };
 		3125CF58247902AD0078AE1D /* BinarySearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3125CF57247902AD0078AE1D /* BinarySearch.swift */; };
 		3162FBE72473CBE1003BEECA /* YBDS.h in Headers */ = {isa = PBXBuildFile; fileRef = 3162FBE52473CBE1003BEECA /* YBDS.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3162FBEE2473CBF5003BEECA /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3162FBED2473CBF5003BEECA /* Queue.swift */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3100A1FD247A680E00639BF2 /* BinaryTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinaryTree.swift; sourceTree = "<group>"; };
 		3125CF57247902AD0078AE1D /* BinarySearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinarySearch.swift; sourceTree = "<group>"; };
 		3162FBE22473CBE1003BEECA /* YBDS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = YBDS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3162FBE52473CBE1003BEECA /* YBDS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YBDS.h; sourceTree = "<group>"; };
@@ -66,6 +68,7 @@
 				3162FBF12473CC75003BEECA /* LinkedList.swift */,
 				3162FBF32473CC9A003BEECA /* QueueUsingLL.swift */,
 				3162FBF52473CCCF003BEECA /* BinarySearchTree.swift */,
+				3100A1FD247A680E00639BF2 /* BinaryTree.swift */,
 			);
 			path = YBDS;
 			sourceTree = "<group>";
@@ -151,6 +154,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3162FBF42473CC9A003BEECA /* QueueUsingLL.swift in Sources */,
+				3100A1FE247A680E00639BF2 /* BinaryTree.swift in Sources */,
 				3162FBF22473CC75003BEECA /* LinkedList.swift in Sources */,
 				3125CF58247902AD0078AE1D /* BinarySearch.swift in Sources */,
 				3162FBF02473CC18003BEECA /* Stack.swift in Sources */,
