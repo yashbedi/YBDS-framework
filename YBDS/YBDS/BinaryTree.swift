@@ -1,16 +1,16 @@
 //
 //  BinaryTree.swift
-//  YBDS
+//  YBDataStructures
 //
-//  Created by Yash Bedi on 24/05/20.
-//  Copyright © 2020 Yash Bedi. All rights reserved.
+//  Created by Yash Bedi on 22/05/20.
 //
 
 import Foundation
+
 // Vanila verion of Generic BinaryTree without using inbuild api's
 // MARK: BinaryTree Data Structure
 
-public final class BinaryTree<T: Comparable> {
+public class BinaryTree<T: Comparable> {
     var rootNode: TreeNode<T>? = nil
     init() { }
     func createNode(data: T) -> TreeNode<T>{
@@ -40,5 +40,14 @@ extension BinaryTree {
         preOrder(node: node?.leftNode)
         preOrder(node: node?.rightNode)
         print(node?.data)
+    }
+}
+
+public extension BinaryTree {
+    func findHeightOfTree(_ node: TreeNode<T>?) -> Int{
+        if node == nil { return -1 }
+        let leftHeight = findHeightOfTree(node?.leftNode)
+        let rightHeight = findHeightOfTree(node?.rightNode)
+        return max(leftHeight, rightHeight) + 1
     }
 }

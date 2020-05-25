@@ -8,7 +8,10 @@
 
 import Foundation
 
-final class TreeNode<T: Comparable> {
+// Vanila verion of Generic BSTree without using inbuild api's
+// MARK: BSTree Data Structure
+
+public final class TreeNode<T: Comparable> {
     var data: T?
     var leftNode: TreeNode<T>?
     var rightNode: TreeNode<T>?
@@ -20,10 +23,7 @@ final class TreeNode<T: Comparable> {
     }
 }
 
-final class BSTree<T: Comparable> {
-    private var rootNode: TreeNode<T>? = nil
-    
-}
+final class BSTree<T: Comparable>: BinaryTree<T> { }
 
 // MARK: Utility functions
 

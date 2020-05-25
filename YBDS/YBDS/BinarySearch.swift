@@ -1,13 +1,13 @@
 //
 //  BinarySearch.swift
-//  YBDS
+//  YBDataStructures
 //
 //  Created by Yash Bedi on 23/05/20.
-//  Copyright © 2020 Yash Bedi. All rights reserved.
 //
 
 import Foundation
 
+// MARK: Time complexity -> Best case : O(1); Worst/Average case : O(LogN);
 public final class BinarySearch<T: Comparable>{
     class func find(_ key: T, where start: Int, and end: Int, from arr: [T]) {
         if start > end {
@@ -25,4 +25,3 @@ public final class BinarySearch<T: Comparable>{
         }
     }
 }
-
