@@ -15,15 +15,16 @@ public extension QueueUsingLL {
     var isEmpty : Bool {
         return list.isEmpty()
     }
-    
-    func enque(_ object: T){
+    func enqueue(_ object: T){
         list.insertAtEndWith(data: object)
     }
-    
-    func deque(){
+    func dequeue(){
+        if list.isEmpty() {
+            debugPrint("Queue is empty")
+            return
+        }
         list.deleteAtBeggining()
     }
-    
     func getPeak() -> T? {
         return isEmpty ? nil : list.firstElem()
     }

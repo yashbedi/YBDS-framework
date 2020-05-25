@@ -168,17 +168,17 @@ extension BSTree {
             return
         }
         let queue = QueueUsingLL<TreeNode<T>>()
-        queue.enque(node!)
+        queue.enqueue(node!)
         while !queue.isEmpty {
             if let currentNode = queue.getPeak(){
                 print("Visited node: ",currentNode.data)
                 if currentNode.leftNode != nil {
-                    queue.enque((currentNode.leftNode)!)
+                    queue.enqueue((currentNode.leftNode)!)
                 }
                 if currentNode.rightNode != nil {
-                    queue.enque((currentNode.rightNode)!)
+                    queue.enqueue((currentNode.rightNode)!)
                 }
-                queue.deque()
+                queue.dequeue()
             }
         }
     }
