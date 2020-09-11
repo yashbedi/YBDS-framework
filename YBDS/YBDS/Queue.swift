@@ -22,8 +22,9 @@ struct Queue<T> {
             rear = 0
             queueArr.insert(data, at: rear)
             
-// MARK: Gives you index out of bounds error. looking at LHS : means we're accesssing rear'th element from queueArr then overwriting it with data. And since nothing exists on that location we get index_out_bounds exception.
             //queueArr[rear] = data
+// MARK: Gives you index out of bounds error. looking at LHS : means we're accesssing rear'th element from queueArr then overwriting it with data. And since nothing exists on that location we get index_out_bounds exception.
+        
             return
         }
         rear += 1
