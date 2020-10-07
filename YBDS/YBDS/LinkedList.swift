@@ -8,7 +8,6 @@
 
 import Foundation
 // Vanila verion of Generic LinkedList without using inbuild api's
-
 // MARK: LinkedList Data Structure
 
 
@@ -28,13 +27,11 @@ public final class LinkedList<T> {
     
     func printList(){
         if isEmpty() {
-            print("Empty List..")
-            print("-------------------------------")
+            debugPrint("Empty List..")
             return
         }
         if listHasOnlyOneNode() {
-            print("Data: ",head?.data)
-            print("-------------------------------")
+            debugPrint("Data: ",head?.data as Any)
             return
         }
         var temp : Node<T> = head!
@@ -42,8 +39,7 @@ public final class LinkedList<T> {
             print("Data: ",temp.data)
             temp = (temp.next)!
         }
-        print("Data: ",temp.data)
-        print("-------------------------------")
+        debugPrint("Data: ",temp.data)
     }
     
     func firstElem() -> T?{
@@ -56,12 +52,12 @@ public final class LinkedList<T> {
 extension LinkedList {
     func insert(at position: Int, with data: T){
         if isEmpty() {
-            print("List is empty by default insertion will happen at position 0")
+            debugPrint("List is empty by default insertion will happen at position 0")
             insertAtBeginning(data)
             return
         }
         if listHasOnlyOneNode() {
-            print("List has only 1 element")
+            debugPrint("List has only 1 element")
             if position == 0 {
                 insertAtBeginning(data)
                 return
@@ -92,7 +88,7 @@ extension LinkedList {
     
     func delete(at position:Int){
         if isEmpty() {
-            print("List is empty...")
+            debugPrint("List is empty...")
             return
         }
         if listHasOnlyOneNode() || position - 1 == 0{
@@ -100,7 +96,7 @@ extension LinkedList {
             return
         }
         if position > numberOfNodes() || position < 0{
-            print("The position doesn't exists..")
+            debugPrint("The position doesn't exists..")
             return
         }
         var temp: Node<T>? = head!
@@ -110,7 +106,7 @@ extension LinkedList {
             temp = (temp?.next)!
         }
         prev?.next = temp?.next
-        print("Deleted node is: ",temp?.data)
+        debugPrint("Deleted node is: ",temp?.data as Any)
         temp = nil
     }
 }
@@ -135,7 +131,7 @@ extension LinkedList {
         }
         var temp: Node<T>? = head!
         head = temp?.next
-        print("Deleted node with data: ",temp?.data)
+//        print("Deleted node with data: ",temp?.data)
         temp = nil
     }
 }
@@ -164,7 +160,7 @@ extension LinkedList {
             fatalError("Empty List")
         }
         if listHasOnlyOneNode() {
-            print("Deleted Node: ",head?.data)
+            debugPrint("Deleted Node: ",head?.data as Any)
             head = nil
             return
         }
@@ -174,7 +170,7 @@ extension LinkedList {
             prev = temp
             temp = (temp?.next)!
         }
-        print("Deleted Node: ",temp?.data)
+        debugPrint("Deleted Node: ",temp?.data as Any)
         prev?.next = nil
         temp = nil
     }

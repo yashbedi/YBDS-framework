@@ -97,7 +97,7 @@ extension DoublyLL {
     
         var temp: DNode<T>? = head
         head = temp?.next
-        debugPrint(" Deleted node is: \(temp?.data)")
+        debugPrint(" Deleted node is: \(temp?.data as Any)")
         temp = nil
     }
     
@@ -114,7 +114,7 @@ extension DoublyLL {
             temp = temp?.next
         }
         prev?.next = nil
-        debugPrint(" Deleted node is: \(temp?.data)")
+        debugPrint(" Deleted node is: \(temp?.data as Any)")
         temp = nil
     }
     
@@ -140,24 +140,13 @@ extension DoublyLL {
         }
         prev?.next = temp?.next
         temp?.next?.prev = prev
-        debugPrint(" Deleted node is: \(temp?.data)")
+        debugPrint(" Deleted node is: \(temp?.data as Any)")
         temp = nil
     }
 }
 
 // MARK: Traversal of DoublyLL
 extension DoublyLL {
-    @discardableResult
-    func traverseDLLToLast(_ isDebugging : Bool = false) -> DNode<T>?{
-        if head == nil { debugPrint("DLL is empty") ; return nil }
-        var temp : DNode<T>? = head
-        isDebugging ? print(" -- ",temp?.data) : ()
-        while temp?.next != nil {
-            temp = temp?.next
-            isDebugging ? print(" -- ",temp?.data) : ()
-        }
-        return temp
-    }
     
     func totalNodes() -> Int{
         var count = 1
@@ -186,5 +175,29 @@ private extension DoublyLL {
         return DNode<T>(data: data,
                         next: nil,
                         prev: nil)
+    }
+}
+
+
+// MARK: Extensions for Dequeue
+extension DoublyLL {
+    func isEmpty()->Bool{
+        return head == nil
+    }
+    
+    func getHead()-> T?{
+        return head?.data
+    }
+    
+    @discardableResult
+    func traverseDLLToLast(_ isDebugging : Bool = false) -> DNode<T>?{
+        if head == nil { debugPrint("DLL is empty") ; return nil }
+        var temp : DNode<T>? = head
+        isDebugging ? debugPrint(" -- ",temp?.data as Any) : ()
+        while temp?.next != nil {
+            temp = temp?.next
+            isDebugging ? debugPrint(" -- ",temp?.data as Any) : ()
+        }
+        return temp
     }
 }

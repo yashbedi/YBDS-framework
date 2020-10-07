@@ -25,22 +25,6 @@ public final class TreeNode<T: Comparable> {
 
 final class BSTree<T: Comparable>: BinaryTree<T> { }
 
-// MARK: Utility functions
-
-extension BSTree {
-    private func createNode(with data: T) -> TreeNode<T>{
-        return TreeNode(data: data, left: nil, right: nil)
-    }
-    private func treeIsEmpty() -> Bool{
-        return rootNode == nil
-    }
-    private func treeHasOneNode() -> Bool{
-        return rootNode?.leftNode == nil && rootNode?.rightNode == nil ? true : false
-    }
-    private func nodeHasChildren(node: TreeNode<T>) -> Bool{
-        return node.leftNode == nil && node.rightNode == nil ? true : false
-    }
-}
 
 
 // MARK: Using Iteration.
@@ -144,6 +128,7 @@ extension BSTree {
     
     func recursiveFindMinInBST(node: inout TreeNode<T>?) -> T{
         if node == nil { fatalError("Tree empty") }
+            
         else if node?.leftNode == nil {
             return (node?.data)!
         }
@@ -171,7 +156,7 @@ extension BSTree {
         queue.enqueue(node!)
         while !queue.isEmpty {
             if let currentNode = queue.getPeak(){
-                print("Visited node: ",currentNode.data)
+                print("Visited node: ",currentNode.data!)
                 if currentNode.leftNode != nil {
                     queue.enqueue((currentNode.leftNode)!)
                 }
@@ -181,5 +166,86 @@ extension BSTree {
                 queue.dequeue()
             }
         }
+    }
+}
+
+extension BSTree {
+    
+    
+    func delete(node: inout TreeNode<T>?, with data: T) -> TreeNode<T>?{
+        
+        if node == nil { return node }
+            
+        else if node!.data! < data {
+            // right subtree
+            return delete(node: &(node!.rightNode), with: data)
+        }
+        else if node!.data! > data {
+            // left subtree
+            return delete(node: &node!.leftNode, with: data)
+        }else{
+            // case 0: with zero left and right child
+            // case 1: with 1 left or right child
+            // case 2: with both left and right child
+            
+                //case 0:
+            if node?.leftNode == nil && node?.rightNode == nil {
+                node = nil
+                return node
+            }   // case 1:
+            else if node?.leftNode == nil {
+                var tempNode: TreeNode<T>? = createNode(with: node!.data!) // MARK: **
+                node = node?.rightNode
+                tempNode = nil // MARK: **
+                return node
+            }   // case 1:
+            else if node?.rightNode == nil {
+                var tempNode: TreeNode<T>? = createNode(with: node!.data!) // MARK: **
+                node = node?.leftNode
+                tempNode = nil // MARK: **
+                return node
+                
+                /// The above code works by deleting the lines which are Marked by `**`. It looks like theres a memory leak but I haven't debbugged it.
+                // TODO: Debugging post deleting those lines
+            }
+                
+                // case 2:
+            else{
+                // either traverse and find max in left subtree or find min in right subtree
+                var tempNode: TreeNode<T>? = recursiveMinInBST(node: &node!.rightNode)
+                node?.data = tempNode?.data
+                node?.rightNode = delete(node: &node!.rightNode, with: tempNode!.data!)
+                return node
+            }
+        }
+    }
+    
+    
+    func recursiveMinInBST(node: inout TreeNode<T>?) -> TreeNode<T>?{
+        if node == nil { return nil }
+            
+        else if node?.leftNode == nil { return node }
+        
+        // search in the left subTree
+        return recursiveMinInBST(node: &node!.leftNode)
+    }
+}
+
+
+
+// MARK: Utility functions
+
+extension BSTree {
+    private func createNode(with data: T) -> TreeNode<T>{
+        return TreeNode(data: data, left: nil, right: nil)
+    }
+    private func treeIsEmpty() -> Bool{
+        return rootNode == nil
+    }
+    private func treeHasOneNode() -> Bool{
+        return rootNode?.leftNode == nil && rootNode?.rightNode == nil ? true : false
+    }
+    private func nodeHasChildren(node: TreeNode<T>) -> Bool{
+        return node.leftNode == nil && node.rightNode == nil ? true : false
     }
 }

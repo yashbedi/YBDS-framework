@@ -22,9 +22,8 @@ struct Queue<T> {
             rear = 0
             queueArr.insert(data, at: rear)
             
-            //queueArr[rear] = data
 // MARK: Gives you index out of bounds error. looking at LHS : means we're accesssing rear'th element from queueArr then overwriting it with data. And since nothing exists on that location we get index_out_bounds exception.
-        
+            //queueArr[rear] = data
             return
         }
         rear += 1
@@ -32,7 +31,7 @@ struct Queue<T> {
     }
     mutating func dequeue(){
         if isQueueEmpty() {
-            fatalError("Queue is Empty...")
+            debugPrint("Queue is Empty...")
         }
         if front == rear {
             front = -1
@@ -44,7 +43,7 @@ struct Queue<T> {
     }
     func element() -> T {
         if isQueueEmpty() {
-            fatalError("Queue is Empty...")
+            debugPrint("Queue is Empty...")
         }
         return queueArr[front]
     }

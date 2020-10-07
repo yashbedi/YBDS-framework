@@ -16,6 +16,7 @@ public class BinaryTree<T: Comparable> {
     func createNode(data: T) -> TreeNode<T>{
         return TreeNode<T>(data: data, left: nil, right: nil)
     }
+    var outerArr = [[T]]()
 }
 
 extension BinaryTree {
@@ -24,22 +25,23 @@ extension BinaryTree {
     // LDR
     func inOrder(node: TreeNode<T>?) {
         if node == nil { return }
-        preOrder(node: node?.leftNode)
-        print(node?.data)
-        preOrder(node: node?.rightNode)
+        inOrder(node: node?.leftNode)
+        print(node?.data as Any)
+        inOrder(node: node?.rightNode)
     }
     // DLR
     func preOrder(node: TreeNode<T>?) {
         if node == nil { return }
-        print(node?.data)
+        print(node?.data as Any)
         preOrder(node: node?.leftNode)
         preOrder(node: node?.rightNode)
     }
     // LRD
     func postOrder(node: TreeNode<T>?) {
-        preOrder(node: node?.leftNode)
-        preOrder(node: node?.rightNode)
-        print(node?.data)
+        if node == nil { return }
+        postOrder(node: node?.leftNode)
+        postOrder(node: node?.rightNode)
+        print(node?.data as Any)
     }
 }
 
@@ -49,5 +51,61 @@ public extension BinaryTree {
         let leftHeight = findHeightOfTree(node?.leftNode)
         let rightHeight = findHeightOfTree(node?.rightNode)
         return max(leftHeight, rightHeight) + 1
+    }
+    
+    /// MARK: Wip.
+    @available(*, deprecated)
+    func isValidBST(_ node: TreeNode<T>?) -> Bool{
+        if node == nil { return true }
+        isValidBST(node?.leftNode)
+        print(node?.data as Any)
+        isValidBST(node?.rightNode)
+
+        return true
+    }
+    
+    func verifyBST(node: TreeNode<T>?, lastValue: inout T?) -> Bool {
+        if node == nil {
+            return true
+        }
+
+        // since we're doing in-order traversal,
+        //  the lastValue from previous traversal path must be <= current value
+        if let prevVal = lastValue, prevVal > (node!.data)!{
+            return false
+        }
+
+        // visit left
+        if !verifyBST(node: node!.leftNode, lastValue: &lastValue) {
+            return false
+        }
+
+        // comapre and visit self node aka current node
+        if let leftValue = lastValue, leftValue > (node!.data)! {
+            return false
+        }
+        lastValue = node!.data
+
+        // visit right
+        if !verifyBST(node: node!.rightNode, lastValue: &lastValue) {
+            return false
+        }
+
+        return true
+    }
+      
+}
+
+extension BinaryTree {
+    func findAllPaths(node: TreeNode<T>?, innerArr: inout [T]){
+        if node == nil { return }
+        innerArr.append(node!.data!)
+        if node?.leftNode == nil && node?.rightNode == nil {
+            outerArr.append(innerArr)
+        }else{
+            findAllPaths(node: node?.leftNode, innerArr: &innerArr)
+            findAllPaths(node: node?.rightNode, innerArr: &innerArr)
+        }
+        innerArr.removeLast()
     }
 }
